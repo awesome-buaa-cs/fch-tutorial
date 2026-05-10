@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>My New Hugo Project</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="
+组合逻辑
+基本的门电路知识掌握以后，接下来我们介绍一下数字电路的基本知识：组合逻辑和时序逻辑。数字电路根据逻辑功能的不同特点，可以分成两大类，一类叫组合逻辑电路（简称组合电路），另一类叫做时序逻辑电路（简称时序电路）。他们有什么区别呢，其实很简单：大家都知道，我们做的每个小电路，都可以抽象成一块封装好的，具有一定功能的电路板，它有输入端、电路板主体（就是内部结构）和输出端。电路内部结构和输入信号共同决定输出信号。组合逻辑电路的输出仅仅取决于当前输入；时序逻辑电路的输出取决于当前的输入和电路原来的状态，或者可以说：时序逻辑电路的输出，不仅与当前输入有关，也与过去的输入有关。时序逻辑是有记忆的电路板，组合逻辑是没有记忆的电路板。">
+    <meta name="generator" content="Hugo 0.161.1">
+    
+    
+    
+      <meta name="robots" content="index, follow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.efe4d852f731d5d1fbb87718387202a97aafd768cdcdaed0662bbe6982e91824.css" >
+
+
+
+
+    
+
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="https://example.org/2024/909/">
+    
+
+    
+    
+    <meta property="og:url" content="https://example.org/2024/909/">
+  <meta property="og:site_name" content="My New Hugo Project">
+  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:description" content="组合逻辑 基本的门电路知识掌握以后，接下来我们介绍一下数字电路的基本知识：组合逻辑和时序逻辑。
+数字电路根据逻辑功能的不同特点，可以分成两大类，一类叫组合逻辑电路（简称组合电路），另一类叫做时序逻辑电路（简称时序电路）。他们有什么区别呢，其实很简单：大家都知道，我们做的每个小电路，都可以抽象成一块封装好的，具有一定功能的电路板，它有输入端、电路板主体（就是内部结构）和输出端。电路内部结构和输入信号共同决定输出信号。组合逻辑电路的输出仅仅取决于当前输入；时序逻辑电路的输出取决于当前的输入和电路原来的状态，或者可以说：时序逻辑电路的输出，不仅与当前输入有关，也与过去的输入有关。时序逻辑是有记忆的电路板，组合逻辑是没有记忆的电路板。">
+  <meta property="og:locale" content="zh_Hans_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="2024">
+
+  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="description" content="组合逻辑 基本的门电路知识掌握以后，接下来我们介绍一下数字电路的基本知识：组合逻辑和时序逻辑。
+数字电路根据逻辑功能的不同特点，可以分成两大类，一类叫组合逻辑电路（简称组合电路），另一类叫做时序逻辑电路（简称时序电路）。他们有什么区别呢，其实很简单：大家都知道，我们做的每个小电路，都可以抽象成一块封装好的，具有一定功能的电路板，它有输入端、电路板主体（就是内部结构）和输出端。电路内部结构和输入信号共同决定输出信号。组合逻辑电路的输出仅仅取决于当前输入；时序逻辑电路的输出取决于当前的输入和电路原来的状态，或者可以说：时序逻辑电路的输出，不仅与当前输入有关，也与过去的输入有关。时序逻辑是有记忆的电路板，组合逻辑是没有记忆的电路板。">
+  <meta itemprop="wordCount" content="108">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:description" content="组合逻辑 基本的门电路知识掌握以后，接下来我们介绍一下数字电路的基本知识：组合逻辑和时序逻辑。
+数字电路根据逻辑功能的不同特点，可以分成两大类，一类叫组合逻辑电路（简称组合电路），另一类叫做时序逻辑电路（简称时序电路）。他们有什么区别呢，其实很简单：大家都知道，我们做的每个小电路，都可以抽象成一块封装好的，具有一定功能的电路板，它有输入端、电路板主体（就是内部结构）和输出端。电路内部结构和输入信号共同决定输出信号。组合逻辑电路的输出仅仅取决于当前输入；时序逻辑电路的输出取决于当前的输入和电路原来的状态，或者可以说：时序逻辑电路的输出，不仅与当前输入有关，也与过去的输入有关。时序逻辑是有记忆的电路板，组合逻辑是没有记忆的电路板。">
+
+      
+      
+    
+	
+  </head><body class="ma0 avenir bg-near-white production is-page is-page page-909">
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l center items-center justify-between">
+    <a href="/" class="f3 fw2 hover-white white-90 dib no-underline">
+      
+        My New Hugo Project
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+
+  <article class="page-909 flex-l mw7 center ph3 flex-wrap justify-between">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        2024s
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1"></h1>
+      
+      
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><div class="blog-post">
+<h3 class="blog-post-title">组合逻辑</h3>
+<p cid="n20" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span class="md-plain md-expand" md-inline="plain" style="box-sizing: border-box">基本的门电路知识掌握以后，接下来我们介绍一下数字电路的基本知识：组合逻辑和时序逻辑。</span></p><p cid="n21" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">数字电路根据逻辑功能的不同特点，可以分成两大类，一类叫组合逻辑电路（简称组合电路），另一类叫做时序逻辑电路（简称时序电路）。他们有什么区别呢，其实很简单：大家都知道，我们做的每个小电路，都可以抽象成一块封装好的，具有一定功能的电路板，它有输入端、电路板主体（就是内部结构）和输出端。电路内部结构和输入信号共同决定输出信号。</span><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">组合逻辑电路的输出仅仅取决于当前输入；时序逻辑电路的输出取决于当前的输入和电路原来的状态，或者可以说：时序逻辑电路的输出，不仅与当前输入有关，也与过去的输入有关。</strong></span><span md-inline="plain" style="box-sizing: border-box">时序逻辑是有记忆的电路板，组合逻辑是没有记忆的电路板。</span></p><p cid="n21" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box"><img alt="2.png" src="/cguserImages?_img=0c0afb69598ddc37d90a721080b6e843.png" title="1665845829373019272.png"/></span></p><p cid="n23" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">我们首先来学习组合逻辑。</strong></span></p><p cid="n24" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">组合逻辑就很简单，理论上，只要明确了我们需要实现的电路的逻辑表达式（大家上学期的离散数学课应该都学过吧？），就可以按照逻辑表达式轻而易举的做出电路图。所以组合逻辑这块的重点就是写好逻辑表达式：大家需要分析题目的需求，抽象出逻辑表达式，然后画出对应的电路图，组合逻辑的问题就是这样。</span></p><p cid="n25" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">我们来看一道例题：现在需要你实现一个电路，它有三个输入端：S、i1、2，和两个输出端 o1、o2。要实现的功能很简单：</span><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">当 S=0 时，你要保证 o1=i1且 o2=i2；当 S=1 时，你要保证 o1=i2，o2=i1。</strong></span></p><p cid="n26" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">题目的需求了解了，这就是一个一位 swap 电路。首先我们要按照题目需求写出真值表。</span></p><p cid="n27" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">S</strong></span> <span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">i1</strong></span> <span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">i2</strong></span> <span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">o1</strong></span> <span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">o2</strong></span></p><hr style="box-sizing: content-box;height: 2px;margin: 16px 0px;border: 0px none;padding: 0px;background-color: rgb(231, 231, 231)"/><pre cid="n29" class="md-fences md-end-block md-fences-with-lineno ty-contain-cm modeLoaded" lang="" mdtype="fences" spellcheck="false" style="box-sizing: border-box;overflow: visible;font-family: var(--monospace);font-size: 0.9em;break-inside: avoid;white-space: normal;background-image: inherit;background-position: inherit;background-size: inherit;background-repeat: inherit;background-attachment: inherit;background-origin: inherit;background-clip: inherit;border: 1px solid rgb(231, 234, 237);border-radius: 3px;padding: 8px 4px 6px 0px;margin-bottom: 15px;margin-top: 15px;width: inherit;color: rgb(51, 51, 51);position: relative !important"> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 0       0        0        0        0</span><br> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 0       0        1        0        1</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 0       1        0        1        0</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 0       1        1        1        1</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 1       0        0        0        0</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 1       0        1        1        0</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 1       1        0        0        1</span><br/> <span role="presentation" style="box-sizing: border-box;padding-right: 0.1px"> 1       1        1        1        1</span></br></pre><p cid="n30" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">接下来按照真值表写出对应的逻辑表达式并化简。</span> <span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">（说明：写出并化简逻辑表达式的方法可以参考《数字设计原理与实践 第四版》P213 。）</strong></span></p><p cid="n31" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">然后按照化简完的表达式画出电路图就可以了：</span></p><p cid="n32" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><img alt="3.png" src="/cguserImages?_img=01ce7656684066bb171aa31810296a7a.png" title="1665845855328081090.png"/></p><p cid="n33" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">也许你会觉得这个过程很繁琐，的确，尤其是输入输出信号变多的时候，手动进行"写真值表-</span><span md-inline="escape" style="box-sizing: border-box">&gt;</span><span md-inline="plain" style="box-sizing: border-box">写逻辑表达式-</span><span md-inline="escape" style="box-sizing: border-box">&gt;</span><span md-inline="plain" style="box-sizing: border-box">化简逻辑表达式-</span><span md-inline="escape" style="box-sizing: border-box">&gt;</span><span md-inline="plain" style="box-sizing: border-box">制作电路"这个过程将变得相当复杂。</span></p><p cid="n34" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">没关系，Logisim 提供了一种更加简便的方法：</span><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">Analyze Circuit</strong></span><span md-inline="plain" style="box-sizing: border-box">。</span></p><p cid="n35" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">点击左上角 </span><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box"><span md-inline="plain" style="box-sizing: border-box">Project-</span><span md-inline="escape" style="box-sizing: border-box">&gt;</span><span md-inline="plain" style="box-sizing: border-box">AnalyzeCircuit</span></strong></span><span md-inline="plain" style="box-sizing: border-box">，定义你的输入输出信号名称，再点击 窗口中的</span><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">Table</strong></span><span md-inline="plain" style="box-sizing: border-box">，手动输入真值表，就可以自动生成化简好的逻辑表达式以及电路了，非常的方便！</span></p><p cid="n36" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><img alt="4.png" src="/cguserImages?_img=0efcd58347b8e241d2bd0e138e790142.png" title="1665845877643064604.png"/></p><p cid="n37" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">绝大多数情况，课设需要你实现的组合逻辑问题，都可以用 Analyze Circuit 完成，大家记得写完真值表后检查一下，看看有没有疏漏，以防出现马虎产生的bug。</span></p><hr style="box-sizing: content-box;height: 2px;margin: 16px 0px;border: 0px none;padding: 0px;background-color: rgb(231, 231, 231)"/><p cid="n39" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">接下来大家可以通过练习一下Lab1的课下实验1（搭建一个小型ALU）来检验对组合逻辑电路的掌握情况。</span></p><p cid="n40" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span class="md-pair-s" md-inline="strong" style="box-sizing: border-box"><strong style="box-sizing: border-box">思考：</strong></span></p><p cid="n41" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">课下测试 1 做出的 ALU 其实是有缺陷的。</span></p><p cid="n42" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">真正我们在设计 CPU 的时候是绝对不允许这样的缺陷存在的，否则我们的 CPU将无法正确执行乘除指令。</span></p><p cid="n43" class="md-end-block md-p" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">我们使用的 MIPS-Lite2 指令集规定：对于乘法指令，得到的结果，高 32 位存储在 hi 寄存器中，低 32 位存储在 lo 寄存器中；对于除法指令，32位的商存储在 lo 寄存器中，32 位的余数存储在 lo寄存器中.而且，真实情况下乘除法运算部件的延迟是比其他算数、逻辑运算的延迟高得多的。因此在真正搭建 CPU 时，乘除法运算通常是放在单独的乘除法运算模块进行，而不是在 ALU 中。</span></p><p cid="n44" class="md-end-block md-p md-focus" mdtype="paragraph" style="box-sizing: border-box;line-height: inherit;orphans: 4;margin-top: 0.8em;margin-bottom: 0.8em;white-space: pre-wrap;position: relative;color: rgb(51, 51, 51);font-family: 'Open Sans', 'Clear Sans', 'Helvetica Neue', Helvetica, Arial, 'Segoe UI Emoji', sans-serif"><span md-inline="plain" style="box-sizing: border-box">感兴趣的同学可以自行查阅资料了解。</span></p><p><br/></p>
+</div><ul class="pa0">
+  
+</ul>
+
+      
+    </div></article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white white-70 dn dib-ns pv2 ph3 no-underline" href="https://example.org/" >
+    &copy;  My New Hugo Project 2026 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>
