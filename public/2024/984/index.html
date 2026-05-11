@@ -6,19 +6,36 @@
     
     <title>My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="
-4.5 测试环境及提交说明
+    <meta name="description" content="提交说明
+本次实验需要提交的文件只有my_assembler_utils.c和my_linker_utils.c。
+测试说明
+测试步骤
+
+实验提供的代码里有针对各平台的辅助文件，将对应的Makefile和libP4.a(Windows系统下为libP4.lib)文件复制到主目录下（即与assembler.c文件同一目录）；
+在主目录下通过命令行执行make assembler可以得到汇编器可执行文件，执行make linker可以得到链接器可执行文件，或执行make可以一起编译汇编器和链接器。
+创建输入文件，并写入你希望测试的MIPS汇编代码，之后调用汇编器和链接器完成MIPS代码到机器码的转换，举例如下：
 
 
+Linux系统与Mac系统下：
 
+./assembler main.asm main.int main.out
+./assembler add.asm add.int add.out
+./linker main.out add.out main.o 
 
+Windows系统下：
 
+assembler.exe main.asm main.int main.out
+assembler.exe add.asm add.int add.out
+linker.exe main.out add.out main.o 
 
+我们提供了各平台下的标准汇编器和链接器文件，以供大家作为参考。
+我们还提供了CPU处理器用于运行机器码并观察结果，使用指南在下一章节。
 
+测试环境
 
-
-
-
+Windows: 可以通过这篇教程（若打不开请复制网址到导航栏 ）安装MinGW-64来执行make，注意需要配置系统变量，并拷贝一个mingw32-make.exe的副本命名为make.exe。
+Linux: 直接安装gcc即可。
+Mac: 直接安装gcc即可。
 ">
     <meta name="generator" content="Hugo 0.161.1">
     
@@ -53,17 +70,26 @@
     <meta property="og:url" content="https://example.org/2024/984/">
   <meta property="og:site_name" content="My New Hugo Project">
   <meta property="og:title" content="My New Hugo Project">
-  <meta property="og:description" content="4.5 测试环境及提交说明">
+  <meta property="og:description" content="提交说明 本次实验需要提交的文件只有my_assembler_utils.c和my_linker_utils.c。
+测试说明 测试步骤 实验提供的代码里有针对各平台的辅助文件，将对应的Makefile和libP4.a(Windows系统下为libP4.lib)文件复制到主目录下（即与assembler.c文件同一目录）； 在主目录下通过命令行执行make assembler可以得到汇编器可执行文件，执行make linker可以得到链接器可执行文件，或执行make可以一起编译汇编器和链接器。 创建输入文件，并写入你希望测试的MIPS汇编代码，之后调用汇编器和链接器完成MIPS代码到机器码的转换，举例如下： Linux系统与Mac系统下：
+./assembler main.asm main.int main.out ./assembler add.asm add.int add.out ./linker main.out add.out main.o Windows系统下：
+assembler.exe main.asm main.int main.out assembler.exe add.asm add.int add.out linker.exe main.out add.out main.o 我们提供了各平台下的标准汇编器和链接器文件，以供大家作为参考。 我们还提供了CPU处理器用于运行机器码并观察结果，使用指南在下一章节。 测试环境 Windows: 可以通过这篇教程（若打不开请复制网址到导航栏 ）安装MinGW-64来执行make，注意需要配置系统变量，并拷贝一个mingw32-make.exe的副本命名为make.exe。 Linux: 直接安装gcc即可。 Mac: 直接安装gcc即可。">
   <meta property="og:locale" content="zh_Hans_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
   <meta itemprop="name" content="My New Hugo Project">
-  <meta itemprop="description" content="4.5 测试环境及提交说明">
-  <meta itemprop="wordCount" content="2">
+  <meta itemprop="description" content="提交说明 本次实验需要提交的文件只有my_assembler_utils.c和my_linker_utils.c。
+测试说明 测试步骤 实验提供的代码里有针对各平台的辅助文件，将对应的Makefile和libP4.a(Windows系统下为libP4.lib)文件复制到主目录下（即与assembler.c文件同一目录）； 在主目录下通过命令行执行make assembler可以得到汇编器可执行文件，执行make linker可以得到链接器可执行文件，或执行make可以一起编译汇编器和链接器。 创建输入文件，并写入你希望测试的MIPS汇编代码，之后调用汇编器和链接器完成MIPS代码到机器码的转换，举例如下： Linux系统与Mac系统下：
+./assembler main.asm main.int main.out ./assembler add.asm add.int add.out ./linker main.out add.out main.o Windows系统下：
+assembler.exe main.asm main.int main.out assembler.exe add.asm add.int add.out linker.exe main.out add.out main.o 我们提供了各平台下的标准汇编器和链接器文件，以供大家作为参考。 我们还提供了CPU处理器用于运行机器码并观察结果，使用指南在下一章节。 测试环境 Windows: 可以通过这篇教程（若打不开请复制网址到导航栏 ）安装MinGW-64来执行make，注意需要配置系统变量，并拷贝一个mingw32-make.exe的副本命名为make.exe。 Linux: 直接安装gcc即可。 Mac: 直接安装gcc即可。">
+  <meta itemprop="wordCount" content="45">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="My New Hugo Project">
-  <meta name="twitter:description" content="4.5 测试环境及提交说明">
+  <meta name="twitter:description" content="提交说明 本次实验需要提交的文件只有my_assembler_utils.c和my_linker_utils.c。
+测试说明 测试步骤 实验提供的代码里有针对各平台的辅助文件，将对应的Makefile和libP4.a(Windows系统下为libP4.lib)文件复制到主目录下（即与assembler.c文件同一目录）； 在主目录下通过命令行执行make assembler可以得到汇编器可执行文件，执行make linker可以得到链接器可执行文件，或执行make可以一起编译汇编器和链接器。 创建输入文件，并写入你希望测试的MIPS汇编代码，之后调用汇编器和链接器完成MIPS代码到机器码的转换，举例如下： Linux系统与Mac系统下：
+./assembler main.asm main.int main.out ./assembler add.asm add.int add.out ./linker main.out add.out main.o Windows系统下：
+assembler.exe main.asm main.int main.out assembler.exe add.asm add.int add.out linker.exe main.out add.out main.o 我们提供了各平台下的标准汇编器和链接器文件，以供大家作为参考。 我们还提供了CPU处理器用于运行机器码并观察结果，使用指南在下一章节。 测试环境 Windows: 可以通过这篇教程（若打不开请复制网址到导航栏 ）安装MinGW-64来执行make，注意需要配置系统变量，并拷贝一个mingw32-make.exe的副本命名为make.exe。 Linux: 直接安装gcc即可。 Mac: 直接安装gcc即可。">
 
       
       
@@ -116,24 +142,38 @@
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><div class="blog-post">
-<h3 class="blog-post-title">4.5 测试环境及提交说明</h3>
-<link href="/includes/cherrymd/mdPreview.css" rel="stylesheet"/>
-<link href="/includes/cherrymd/dist/cherry-markdown.css" rel="stylesheet" type="text/css"/>
-<link href="/includes/cherrymd/dep/katex.min.css" rel="stylesheet"/>
-<link href="/includes/cherrymd/dep/viewer.min.css" rel="stylesheet"/>
-<div id="cgpreviewmarkdown"></div>
-<script src="/includes/cherrymd/dep/echarts.min.js" type="text/javascript"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dep/katex.min.js" type="text/javascript"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dist/cherry-markdown.min.js"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dep/viewer.min.js"></script>
-<script charset="UTF-8" src="/includes/cherrymd/mdPreview.v2.js"></script>
-<script>
-                            
-                            
-                            cgRenderMarkdown('PWtutorialIndex984-36257');
-                        </script>
-</div><ul class="pa0">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h3 id="提交说明">提交说明</h3>
+<p>本次实验需要提交的文件只有<code>my_assembler_utils.c</code>和<code>my_linker_utils.c</code>。</p>
+<h3 id="测试说明">测试说明</h3>
+<h4 id="测试步骤">测试步骤</h4>
+<ul>
+<li>实验提供的代码里有针对各平台的辅助文件，将对应的<code>Makefile</code>和<code>libP4.a</code>(Windows系统下为<code>libP4.lib</code>)文件复制到主目录下（即与<code>assembler.c</code>文件同一目录）；</li>
+<li>在主目录下通过命令行执行<code>make assembler</code>可以得到汇编器可执行文件，执行<code>make linker</code>可以得到链接器可执行文件，或执行<code>make</code>可以一起编译汇编器和链接器。</li>
+<li>创建输入文件，并写入你希望测试的<code>MIPS</code>汇编代码，之后调用汇编器和链接器完成<code>MIPS</code>代码到机器码的转换，举例如下：</li>
+</ul>
+<blockquote>
+<p>Linux系统与Mac系统下：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>./assembler main.asm main.int main.out
+</span></span><span style="display:flex;"><span>./assembler add.asm add.int add.out
+</span></span><span style="display:flex;"><span>./linker main.out add.out main.o 
+</span></span></code></pre></div><blockquote>
+<p>Windows系统下：</p>
+</blockquote>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>assembler.exe main.asm main.int main.out
+</span></span><span style="display:flex;"><span>assembler.exe add.asm add.int add.out
+</span></span><span style="display:flex;"><span>linker.exe main.out add.out main.o 
+</span></span></code></pre></div><ul>
+<li>我们提供了各平台下的标准汇编器和链接器文件，以供大家作为参考。</li>
+<li>我们还提供了CPU处理器用于运行机器码并观察结果，使用指南在下一章节。</li>
+</ul>
+<h4 id="测试环境">测试环境</h4>
+<ul>
+<li>Windows: 可以通过这篇教程（<a href="https://blog.csdn.net/fengyuyeguirenenen/article/details/129162492">若打不开请复制网址到导航栏</a> ）安装<code>MinGW-64</code>来执行<code>make</code>，注意需要配置系统变量，并拷贝一个<code>mingw32-make.exe</code>的副本命名为<code>make.exe</code>。</li>
+<li>Linux: 直接安装<code>gcc</code>即可。</li>
+<li>Mac: 直接安装<code>gcc</code>即可。</li>
+</ul>
+<ul class="pa0">
   
 </ul>
 

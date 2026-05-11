@@ -6,20 +6,70 @@
     
     <title>My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
-    <meta name="description" content="
-Valgrind与Cache评测
+    <meta name="description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
+Valgrind简介
+Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
+Valgrind的安装
+由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
+
+关于Mac：官方的valgrind不支持Mac或对Mac后续版本支持的不好，需要安装Mac的镜像版本，可以在github上找到：https://github.com/LouisBrunner/valgrind-macos
+在安装时遇到的常见问题，可以参考博文：https://zhuanlan.zhihu.com/p/508470880
+
+笔者用的是ubuntu，在ubuntu下直接使用系统包管理工具即可安装（无特殊需要建议直接以此方式安装）：
+sudo apt-get install valgrind
+如果有特定需求需要安装一些其他版本，可以进入valgrind官网，下载对应的源码并make安装（本实验不推荐此种安装方式）：
 
 
+首先是进入官网下载对应版本：https://sourceware.org/pub/valgrind/valgrind-3.12.0.tar.bz2
 
 
+然后解压缩：
+tar -jxvf valgrind-3.14.0.tar.bz2
 
 
+进入目录,进行安装,其中/home/user1/valgrind是你想安装的目录：
+cd valgrind-3.14.0
+./configure --prefix=/home/user1/valgrind
+make
+make install
 
 
+配置环境变量，首先打开~/.bashrc，将下面一段话加入该文件，路径即为安装目录下bin目录：
+export PATH=$PATH:~/valgrind/bin/
+使改变生效：
+source ~/.bashrc
 
 
+Valgrind的使用
+valgrind的使用可以简要概括为以下表示：
+valgrind [valgrind-options] &lt;your-prog&gt; [your-prog-options]
+其中，&lt;your-prog&gt; [your-prog-options]部分是需要进行内存调试的程序执行命令，与在shell命令行中执行命令的方式完全相同。[valgrind-options]是我们重点需要关注的部分，通过这些options我们得以应用valgrind的功能。valgrind提供了丰富的调试选项，以下列出一些常用的选项。
 
-">
+
+--tool=&lt;toolname&gt; [default: memcheck]
+最核心的命令，选择了valgrind当前的工作模式。
+
+
+-h --help
+与一般的帮助选项相同，可以比较便捷的查看valgrind的命令用法。
+
+
+-v --verbose
+输出详细信息。
+
+
+--log-fd=&lt;number&gt; [default: 2, stderr]
+打印输出访问记录的位置，number为1表示stdout，number为2表示stderr，用此命令时一般设number为1在命令交互界面查看输出。
+
+
+--log-file=&lt;filename&gt;
+与上一条命令类似，但是将记录日志输出到对应的文件中（更加推荐这种方式）。
+
+
+Valgrind在Cache评测中的应用
+Part1：Cache的模拟器实现
+valgrind可以通过简单的命令生成程序模拟执行过程中产生的记录日志（memory trace）。
+memory trace的格式如下：">
     <meta name="generator" content="Hugo 0.161.1">
     
     
@@ -53,17 +103,92 @@ Valgrind与Cache评测
     <meta property="og:url" content="https://example.org/2024/978/">
   <meta property="og:site_name" content="My New Hugo Project">
   <meta property="og:title" content="My New Hugo Project">
-  <meta property="og:description" content="Valgrind与Cache评测">
+  <meta property="og:description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
+Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
+Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
+关于Mac：官方的valgrind不支持Mac或对Mac后续版本支持的不好，需要安装Mac的镜像版本，可以在github上找到：https://github.com/LouisBrunner/valgrind-macos
+在安装时遇到的常见问题，可以参考博文：https://zhuanlan.zhihu.com/p/508470880
+笔者用的是ubuntu，在ubuntu下直接使用系统包管理工具即可安装（无特殊需要建议直接以此方式安装）：
+sudo apt-get install valgrind 如果有特定需求需要安装一些其他版本，可以进入valgrind官网，下载对应的源码并make安装（本实验不推荐此种安装方式）：
+首先是进入官网下载对应版本：https://sourceware.org/pub/valgrind/valgrind-3.12.0.tar.bz2
+然后解压缩：
+tar -jxvf valgrind-3.14.0.tar.bz2 进入目录,进行安装,其中/home/user1/valgrind是你想安装的目录：
+cd valgrind-3.14.0 ./configure --prefix=/home/user1/valgrind make make install 配置环境变量，首先打开~/.bashrc，将下面一段话加入该文件，路径即为安装目录下bin目录：
+export PATH=$PATH:~/valgrind/bin/ 使改变生效：
+source ~/.bashrc Valgrind的使用 valgrind的使用可以简要概括为以下表示：
+valgrind [valgrind-options] &lt;your-prog&gt; [your-prog-options] 其中，&lt;your-prog&gt; [your-prog-options]部分是需要进行内存调试的程序执行命令，与在shell命令行中执行命令的方式完全相同。[valgrind-options]是我们重点需要关注的部分，通过这些options我们得以应用valgrind的功能。valgrind提供了丰富的调试选项，以下列出一些常用的选项。
+--tool=&lt;toolname&gt; [default: memcheck]
+最核心的命令，选择了valgrind当前的工作模式。
+-h --help
+与一般的帮助选项相同，可以比较便捷的查看valgrind的命令用法。
+-v --verbose
+输出详细信息。
+--log-fd=&lt;number&gt; [default: 2, stderr]
+打印输出访问记录的位置，number为1表示stdout，number为2表示stderr，用此命令时一般设number为1在命令交互界面查看输出。
+--log-file=&lt;filename&gt;
+与上一条命令类似，但是将记录日志输出到对应的文件中（更加推荐这种方式）。
+Valgrind在Cache评测中的应用 Part1：Cache的模拟器实现 valgrind可以通过简单的命令生成程序模拟执行过程中产生的记录日志（memory trace）。
+memory trace的格式如下：">
   <meta property="og:locale" content="zh_Hans_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
   <meta itemprop="name" content="My New Hugo Project">
-  <meta itemprop="description" content="Valgrind与Cache评测">
-  <meta itemprop="wordCount" content="1">
+  <meta itemprop="description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
+Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
+Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
+关于Mac：官方的valgrind不支持Mac或对Mac后续版本支持的不好，需要安装Mac的镜像版本，可以在github上找到：https://github.com/LouisBrunner/valgrind-macos
+在安装时遇到的常见问题，可以参考博文：https://zhuanlan.zhihu.com/p/508470880
+笔者用的是ubuntu，在ubuntu下直接使用系统包管理工具即可安装（无特殊需要建议直接以此方式安装）：
+sudo apt-get install valgrind 如果有特定需求需要安装一些其他版本，可以进入valgrind官网，下载对应的源码并make安装（本实验不推荐此种安装方式）：
+首先是进入官网下载对应版本：https://sourceware.org/pub/valgrind/valgrind-3.12.0.tar.bz2
+然后解压缩：
+tar -jxvf valgrind-3.14.0.tar.bz2 进入目录,进行安装,其中/home/user1/valgrind是你想安装的目录：
+cd valgrind-3.14.0 ./configure --prefix=/home/user1/valgrind make make install 配置环境变量，首先打开~/.bashrc，将下面一段话加入该文件，路径即为安装目录下bin目录：
+export PATH=$PATH:~/valgrind/bin/ 使改变生效：
+source ~/.bashrc Valgrind的使用 valgrind的使用可以简要概括为以下表示：
+valgrind [valgrind-options] &lt;your-prog&gt; [your-prog-options] 其中，&lt;your-prog&gt; [your-prog-options]部分是需要进行内存调试的程序执行命令，与在shell命令行中执行命令的方式完全相同。[valgrind-options]是我们重点需要关注的部分，通过这些options我们得以应用valgrind的功能。valgrind提供了丰富的调试选项，以下列出一些常用的选项。
+--tool=&lt;toolname&gt; [default: memcheck]
+最核心的命令，选择了valgrind当前的工作模式。
+-h --help
+与一般的帮助选项相同，可以比较便捷的查看valgrind的命令用法。
+-v --verbose
+输出详细信息。
+--log-fd=&lt;number&gt; [default: 2, stderr]
+打印输出访问记录的位置，number为1表示stdout，number为2表示stderr，用此命令时一般设number为1在命令交互界面查看输出。
+--log-file=&lt;filename&gt;
+与上一条命令类似，但是将记录日志输出到对应的文件中（更加推荐这种方式）。
+Valgrind在Cache评测中的应用 Part1：Cache的模拟器实现 valgrind可以通过简单的命令生成程序模拟执行过程中产生的记录日志（memory trace）。
+memory trace的格式如下：">
+  <meta itemprop="wordCount" content="163">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="My New Hugo Project">
-  <meta name="twitter:description" content="Valgrind与Cache评测">
+  <meta name="twitter:description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
+Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
+Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
+关于Mac：官方的valgrind不支持Mac或对Mac后续版本支持的不好，需要安装Mac的镜像版本，可以在github上找到：https://github.com/LouisBrunner/valgrind-macos
+在安装时遇到的常见问题，可以参考博文：https://zhuanlan.zhihu.com/p/508470880
+笔者用的是ubuntu，在ubuntu下直接使用系统包管理工具即可安装（无特殊需要建议直接以此方式安装）：
+sudo apt-get install valgrind 如果有特定需求需要安装一些其他版本，可以进入valgrind官网，下载对应的源码并make安装（本实验不推荐此种安装方式）：
+首先是进入官网下载对应版本：https://sourceware.org/pub/valgrind/valgrind-3.12.0.tar.bz2
+然后解压缩：
+tar -jxvf valgrind-3.14.0.tar.bz2 进入目录,进行安装,其中/home/user1/valgrind是你想安装的目录：
+cd valgrind-3.14.0 ./configure --prefix=/home/user1/valgrind make make install 配置环境变量，首先打开~/.bashrc，将下面一段话加入该文件，路径即为安装目录下bin目录：
+export PATH=$PATH:~/valgrind/bin/ 使改变生效：
+source ~/.bashrc Valgrind的使用 valgrind的使用可以简要概括为以下表示：
+valgrind [valgrind-options] &lt;your-prog&gt; [your-prog-options] 其中，&lt;your-prog&gt; [your-prog-options]部分是需要进行内存调试的程序执行命令，与在shell命令行中执行命令的方式完全相同。[valgrind-options]是我们重点需要关注的部分，通过这些options我们得以应用valgrind的功能。valgrind提供了丰富的调试选项，以下列出一些常用的选项。
+--tool=&lt;toolname&gt; [default: memcheck]
+最核心的命令，选择了valgrind当前的工作模式。
+-h --help
+与一般的帮助选项相同，可以比较便捷的查看valgrind的命令用法。
+-v --verbose
+输出详细信息。
+--log-fd=&lt;number&gt; [default: 2, stderr]
+打印输出访问记录的位置，number为1表示stdout，number为2表示stderr，用此命令时一般设number为1在命令交互界面查看输出。
+--log-file=&lt;filename&gt;
+与上一条命令类似，但是将记录日志输出到对应的文件中（更加推荐这种方式）。
+Valgrind在Cache评测中的应用 Part1：Cache的模拟器实现 valgrind可以通过简单的命令生成程序模拟执行过程中产生的记录日志（memory trace）。
+memory trace的格式如下：">
 
       
       
@@ -116,24 +241,124 @@ Valgrind与Cache评测
       
       
     </header>
-    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><div class="blog-post">
-<h3 class="blog-post-title">Valgrind与Cache评测</h3>
-<link href="/includes/cherrymd/mdPreview.css" rel="stylesheet"/>
-<link href="/includes/cherrymd/dist/cherry-markdown.css" rel="stylesheet" type="text/css"/>
-<link href="/includes/cherrymd/dep/katex.min.css" rel="stylesheet"/>
-<link href="/includes/cherrymd/dep/viewer.min.css" rel="stylesheet"/>
-<div id="cgpreviewmarkdown"></div>
-<script src="/includes/cherrymd/dep/echarts.min.js" type="text/javascript"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dep/katex.min.js" type="text/javascript"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dist/cherry-markdown.min.js"></script>
-<script charset="UTF-8" src="/includes/cherrymd/dep/viewer.min.js"></script>
-<script charset="UTF-8" src="/includes/cherrymd/mdPreview.v2.js"></script>
-<script>
-                            
-                            
-                            cgRenderMarkdown('PWtutorialIndex978-36257');
-                        </script>
-</div><ul class="pa0">
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><p>本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（<strong>此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可</strong>）。</p>
+<h3 id="valgrind简介">Valgrind简介</h3>
+<p>Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。</p>
+<h4 id="valgrind的安装">Valgrind的安装</h4>
+<p>由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。</p>
+<blockquote>
+<p>关于Mac：官方的valgrind不支持Mac或对Mac后续版本支持的不好，需要安装Mac的镜像版本，可以在github上找到：https://github.com/LouisBrunner/valgrind-macos</p>
+<p>在安装时遇到的常见问题，可以参考博文：https://zhuanlan.zhihu.com/p/508470880</p>
+</blockquote>
+<p>笔者用的是ubuntu，在ubuntu下<strong>直接使用系统包管理工具即可安装</strong>（无特殊需要建议直接以此方式安装）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>sudo apt-get install valgrind
+</span></span></code></pre></div><p>如果有特定需求需要安装一些其他版本，可以进入valgrind官网，下载对应的源码并make安装（<strong>本实验不推荐此种安装方式</strong>）：</p>
+<ul>
+<li>
+<p>首先是进入官网下载对应版本：https://sourceware.org/pub/valgrind/valgrind-3.12.0.tar.bz2</p>
+</li>
+<li>
+<p>然后解压缩：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>tar -jxvf valgrind-3.14.0.tar.bz2
+</span></span></code></pre></div></li>
+<li>
+<p>进入目录,进行安装,其中/home/user1/valgrind是你想安装的目录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>cd valgrind-3.14.0
+</span></span><span style="display:flex;"><span>./configure --prefix<span style="color:#f92672">=</span>/home/user1/valgrind
+</span></span><span style="display:flex;"><span>make
+</span></span><span style="display:flex;"><span>make install
+</span></span></code></pre></div></li>
+<li>
+<p>配置环境变量，首先打开~/.bashrc，将下面一段话加入该文件，路径即为安装目录下bin目录：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>export PATH<span style="color:#f92672">=</span>$PATH:~/valgrind/bin/
+</span></span></code></pre></div><p>使改变生效：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>source ~/.bashrc
+</span></span></code></pre></div></li>
+</ul>
+<h4 id="valgrind的使用">Valgrind的使用</h4>
+<p>valgrind的使用可以简要概括为以下表示：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span>valgrind <span style="color:#f92672">[</span>valgrind-options<span style="color:#f92672">]</span> &lt;your-prog&gt; <span style="color:#f92672">[</span>your-prog-options<span style="color:#f92672">]</span>
+</span></span></code></pre></div><p>其中，<code>&lt;your-prog&gt; [your-prog-options]</code>部分是需要进行内存调试的程序执行命令，与在shell命令行中执行命令的方式完全相同。<code>[valgrind-options]</code>是我们重点需要关注的部分，通过这些options我们得以应用valgrind的功能。valgrind提供了丰富的调试选项，以下列出一些常用的选项。</p>
+<ul>
+<li>
+<p><code>--tool=&lt;toolname&gt; [default: memcheck]</code></p>
+<p>最核心的命令，选择了valgrind当前的工作模式。</p>
+</li>
+<li>
+<p><code>-h --help</code></p>
+<p>与一般的帮助选项相同，可以比较便捷的查看valgrind的命令用法。</p>
+</li>
+<li>
+<p><code>-v --verbose</code></p>
+<p>输出详细信息。</p>
+</li>
+<li>
+<p><code>--log-fd=&lt;number&gt; [default: 2, stderr]</code></p>
+<p>打印输出访问记录的位置，<code>number</code>为1表示stdout，<code>number</code>为2表示stderr，用此命令时一般设<code>number</code>为1在命令交互界面查看输出。</p>
+</li>
+<li>
+<p><code>--log-file=&lt;filename&gt;</code></p>
+<p>与上一条命令类似，但是将记录日志输出到对应的文件中（更加推荐这种方式）。</p>
+</li>
+</ul>
+<h3 id="valgrind在cache评测中的应用">Valgrind在Cache评测中的应用</h3>
+<h4 id="part1cache的模拟器实现">Part1：Cache的模拟器实现</h4>
+<p>valgrind可以通过简单的命令生成程序模拟执行过程中产生的记录日志（memory trace）。</p>
+<p>memory trace的格式如下：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-shell" data-lang="shell"><span style="display:flex;"><span><span style="color:#f92672">[</span>space<span style="color:#f92672">]</span>&lt;operation&gt; &lt;address&gt;,&lt;size&gt;
+</span></span></code></pre></div><p>其中<code>operation</code>表示操作类型，<code>address</code>和<code>size</code>则对应其操作的地址和字节数。</p>
+<p>关于操作类型，共分为以下四类：</p>
+<ul>
+<li><code>I</code> 表示取指</li>
+<li><code>L</code> 表示取数（Load）</li>
+<li><code>S</code> 表示存数（Store）</li>
+<li><code>M</code> 表示修改（可以视为先Load后Store）</li>
+</ul>
+<p>对于Cache而言，我们只需关心 &ldquo;L&rdquo; &ldquo;S&quot;和&quot;M&quot;三类操作。</p>
+<p>具体来说，我们的Cache模拟器从trace文件中读取对应的操作，并根据操作类型和操作内容更新Cache，通过与参考Cache比对命中和缺失情况来判断Cache是否正确。</p>
+<h4 id="part2矩阵转置缺失率评测">Part2：矩阵转置缺失率评测</h4>
+<p>评测的核心即，如何通过valgrind获取矩阵转置过程中的内存访问情况，并通过Cache模拟器进行检验。</p>
+<p>在实验的评测代码<code>test-trans.c</code>中给出了完整的评测逻辑：</p>
+<ul>
+<li>
+<p>首先考察<code>tracegen</code>程序，在<code>tracegen.c</code>中，调用了我们在<code>trans.c</code>中补全的转置函数，并完成了矩阵的初始化、转置及检验全过程。</p>
+</li>
+<li>
+<p>首先执行<code>tracegen</code>生成对应的记录日志<code>trace.tmp</code>（<code>test-trans.c</code>第71行）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">sprintf</span>(cmd, <span style="color:#e6db74">&#34;valgrind --tool=lackey --trace-mem=yes --log-fd=1 -v ./tracegen -M %d -N %d -F %d  &gt; trace.tmp&#34;</span>, M, N,i);
+</span></span><span style="display:flex;"><span>flag<span style="color:#f92672">=</span><span style="color:#a6e22e">WEXITSTATUS</span>(<span style="color:#a6e22e">system</span>(cmd));
+</span></span></code></pre></div><p>该访问记录包含了矩阵初始化、转置、检验全过程的记录日志。</p>
+</li>
+<li>
+<p>我们需要根据<code>trace.tmp</code>，找到我们执行矩阵转置的部分，将其中涉及到存数/取数的命令提取出来，放到<code>trace.f0</code>（可以同时评测多个转置函数，对应<code>trace.f1</code>，<code>trace.f2</code>&hellip;）。</p>
+<p>如何识别出<code>trace.tmp</code>的哪一部分是矩阵转置呢？也即如何识别出<code>tracegen</code>程序的哪一部分是矩阵转置呢？这里用到了一个小trick：</p>
+<ul>
+<li>
+<p>首先在<code>tracegen.c</code>中声明了两个<code>volatile</code>变量，<code>volatile</code>变量的特点是，会分配在内存中指定地址，不随着程序的执行而改变。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">char</span> MARKER_START, MARKER_END;
+</span></span></code></pre></div><p>之后保存这两个变量的内存地址：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">fprintf</span>(marker_fp, <span style="color:#e6db74">&#34;%llx %llx&#34;</span>, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">&amp;</span>MARKER_START, (<span style="color:#66d9ef">unsigned</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">int</span>) <span style="color:#f92672">&amp;</span>MARKER_END );
+</span></span></code></pre></div></li>
+<li>
+<p>然后在调用转置函数的前后，标记这两个变量：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span>MARKER_START <span style="color:#f92672">=</span> <span style="color:#ae81ff">33</span>;
+</span></span><span style="display:flex;"><span>(<span style="color:#f92672">*</span>func_list[selectedFunc].func_ptr)(M, N, A, B);
+</span></span><span style="display:flex;"><span>MARKER_END <span style="color:#f92672">=</span> <span style="color:#ae81ff">34</span>;
+</span></span></code></pre></div></li>
+<li>
+<p>在读取<code>trace.tmp</code>的时候，所检测到的夹在两个变量之间的部分也就是矩阵转置的部分。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>最后将矩阵转置函数的内存访问记录输入到我们的Cache模拟器中，得到最终的缺失结果（<code>test-trans.c</code>第140行）：</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#a6e22e">sprintf</span>(cmd, <span style="color:#e6db74">&#34;./csim-ref -s %u -E %u -b %u -t trace.f%d &gt; /dev/null&#34;</span>, 
+</span></span><span style="display:flex;"><span>                s, E, b, i);
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">system</span>(cmd);
+</span></span></code></pre></div></li>
+</ul>
+<p>此外需要特别注意，实验二评测中实际给出的miss数量一般会比理论分析多出3次，这3次是在仿真过程中产生的与矩阵转置过程无关的其他开销，<strong>我们的评测以实际给出的miss数量为准。</strong></p>
+<ul class="pa0">
   
 </ul>
 

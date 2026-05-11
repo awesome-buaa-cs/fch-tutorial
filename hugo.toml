@@ -2,3 +2,6 @@ baseURL = 'https://example.org/'
 locale = 'zh-Hans-CN'
 title = 'My New Hugo Project'
 theme = 'ananke'
+
+[markup.goldmark.renderer]
+unsafe = true
