@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Project</title>
+    <title>4.6 CPU使用指南 | My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="
 李宇衡 liyuheng55555@126.com
@@ -101,7 +101,7 @@ acf2fff8
     
     <meta property="og:url" content="https://example.org/2024/985/">
   <meta property="og:site_name" content="My New Hugo Project">
-  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:title" content="4.6 CPU使用指南">
   <meta property="og:description" content="李宇衡 liyuheng55555@126.com
 前言 这个CPU大体上和理论课讲过的单周期CPU差不多，就多一些细节，相信大家看一眼就知道怎么用，多看几眼就看明白结构了。
 注意使用本次实验提供的2.16版logisim来打开，据测试jdk8也是能跑的，助教本地的jdk15也可以，要是jdk17、18就更没问题了。用logisim2.7可能CPU不能正常运行。
@@ -118,7 +118,7 @@ v2.0 raw 3c010000 34230000 2411000a 24120014 acff0000 acf1fffc acf2fff8 0007e821
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
-  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="name" content="4.6 CPU使用指南">
   <meta itemprop="description" content="李宇衡 liyuheng55555@126.com
 前言 这个CPU大体上和理论课讲过的单周期CPU差不多，就多一些细节，相信大家看一眼就知道怎么用，多看几眼就看明白结构了。
 注意使用本次实验提供的2.16版logisim来打开，据测试jdk8也是能跑的，助教本地的jdk15也可以，要是jdk17、18就更没问题了。用logisim2.7可能CPU不能正常运行。
@@ -133,7 +133,7 @@ CPU支持的指令与指导书同步，因此不要测试超出的指令，可�
 v2.0 raw 3c010000 34230000 2411000a 24120014 acff0000 acf1fffc acf2fff8 0007e821 0c000c0d 8fbf0000 00024021 11000001 08000c0d 8fb5fffc 8fb6fff8 02b64021 00081021 03e00008 然后找到ROM，右键点击并选择’加载数据镜像’，最后选择刚刚的机器码文件即可。">
   <meta itemprop="wordCount" content="108">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:title" content="4.6 CPU使用指南">
   <meta name="twitter:description" content="李宇衡 liyuheng55555@126.com
 前言 这个CPU大体上和理论课讲过的单周期CPU差不多，就多一些细节，相信大家看一眼就知道怎么用，多看几眼就看明白结构了。
 注意使用本次实验提供的2.16版logisim来打开，据测试jdk8也是能跑的，助教本地的jdk15也可以，要是jdk17、18就更没问题了。用logisim2.7可能CPU不能正常运行。
@@ -190,7 +190,7 @@ v2.0 raw 3c010000 34230000 2411000a 24120014 acff0000 acf1fffc acf2fff8 0007e821
           
         2024
       </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
+<h1 class="f1 athelas mt3 mb1">4.6 CPU使用指南</h1>
       
       
       
@@ -236,7 +236,7 @@ add:
 <h3 id="导入机器码">导入机器码</h3>
 <h4 id="用mars导出机器码">用MARS导出机器码</h4>
 <p>在<code>MARS</code>编写好代码并汇编完成之后，选择上方工具栏<code>Dump</code>功能，如下所示：</p>
-<p><img src="/cguserImages?_img=e0b54859a4f6d92b3cd60d36d372f6e6.png" alt=""></p>
+<p><img src="../images/e0b54859a4f6d92b3cd60d36d372f6e6.png" alt=""></p>
 <p>之后在<code>Dump Format</code>里选择<code>Hexadecimal Text</code>并导出，就可以得到与我们的汇编链接器输出的同样格式的十六进制机器码了。</p>
 <h4 id="将机器码导入rom">将机器码导入ROM</h4>
 <p>为了使用CPU处理器，我们需要将机器码导入ROM，也就是指令存储器。</p>
@@ -261,7 +261,7 @@ add:
 </span></span><span style="display:flex;"><span><span style="color:#ae81ff">00081021</span>
 </span></span><span style="display:flex;"><span>03e00008
 </span></span></code></pre></div><p>然后找到ROM，右键点击并选择&rsquo;加载数据镜像&rsquo;，最后选择刚刚的机器码文件即可。</p>
-<p><img src="/cguserImages?_img=7b238d0aa76a5b3386c17d73e733fd84.png" alt=""></p>
+<p><img src="../images/7b238d0aa76a5b3386c17d73e733fd84.png" alt=""></p>
 <h3 id="停机">停机</h3>
 <p>目前CPU可能由于4种原因停机，分别为：</p>
 <ul>

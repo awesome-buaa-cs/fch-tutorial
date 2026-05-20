@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Project</title>
+    <title>高级篇 | My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="
               
@@ -49,41 +49,41 @@
     
     <meta property="og:url" content="https://example.org/2024/919/">
   <meta property="og:site_name" content="My New Hugo Project">
-  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:title" content="高级篇">
   <meta property="og:description" content="高级篇 前面我们已经学习了 MIPS 汇编的基本使用。
 下面我们在此基础上回顾一下 MIPS 汇编，同时讲一些高级一点的用法。
 宏定义有的同学可能会说，这个输入输出每次都要写好几条指令才能做到，但是每次写起来都是一样的，有没有更方便的方法去完成这件事呢？
 当然有，我们隆重向大家介绍宏定义。
 宏定义需要使用 .macro 和 .end_macro 进行包裹。
 看下面的例子：
-.macro RI(%i)
-li $v0, 5 syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
+.macro RI(%i) li $v0, 5
+syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
 $v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程序会进行读入整数的操作。">
   <meta property="og:locale" content="zh_Hans_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
-  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="name" content="高级篇">
   <meta itemprop="description" content="高级篇 前面我们已经学习了 MIPS 汇编的基本使用。
 下面我们在此基础上回顾一下 MIPS 汇编，同时讲一些高级一点的用法。
 宏定义有的同学可能会说，这个输入输出每次都要写好几条指令才能做到，但是每次写起来都是一样的，有没有更方便的方法去完成这件事呢？
 当然有，我们隆重向大家介绍宏定义。
 宏定义需要使用 .macro 和 .end_macro 进行包裹。
 看下面的例子：
-.macro RI(%i)
-li $v0, 5 syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
+.macro RI(%i) li $v0, 5
+syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
 $v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程序会进行读入整数的操作。">
   <meta itemprop="wordCount" content="354">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:title" content="高级篇">
   <meta name="twitter:description" content="高级篇 前面我们已经学习了 MIPS 汇编的基本使用。
 下面我们在此基础上回顾一下 MIPS 汇编，同时讲一些高级一点的用法。
 宏定义有的同学可能会说，这个输入输出每次都要写好几条指令才能做到，但是每次写起来都是一样的，有没有更方便的方法去完成这件事呢？
 当然有，我们隆重向大家介绍宏定义。
 宏定义需要使用 .macro 和 .end_macro 进行包裹。
 看下面的例子：
-.macro RI(%i)
-li $v0, 5 syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
+.macro RI(%i) li $v0, 5
+syscall move %i, $v0 .end_macro首先阅读一下中间三行 MIPS 代码：
 $v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程序会进行读入整数的操作。">
 
       
@@ -129,7 +129,7 @@ $v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程�
           
         2024
       </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
+<h1 class="f1 athelas mt3 mb1">高级篇</h1>
       
       
       
@@ -147,7 +147,7 @@ $v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程�
               
                     
                     
-                    <p><span style="font-family: Menlo, Monaco, Consolas, monospace;">前面我们已经学习了 MIPS 汇编的基本使用。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">下面我们在此基础上回顾一下 MIPS 汇编，同时讲一些高级一点的用法。</span></p><h3><span style="font-family: Menlo, Monaco, Consolas, monospace;">宏定义</span></h3><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">有的同学可能会说，这个输入输出每次都要写好几条指令才能做到，但是每次写起来都是一样的，有没有更方便的方法去完成这件事呢？</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">当然有，我们隆重向大家介绍宏定义。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">宏定义需要使用 .macro 和 .end_macro 进行包裹。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">看下面的例子：</span></p><pre><span style="font-family: Menlo, Monaco, Consolas, monospace;"> .macro RI(%i)<br>     li $v0, 5<br/>     syscall<br/>     move %i, $v0<br/> .end_macro<br/></br></span></pre><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">首先阅读一下中间三行 MIPS 代码：</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">$v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程序会进行读入整数的操作。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">然后，将读到 $v0 寄存器的值移动到 %i。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">坏了，%i 是什么没听说过啊？往上找找 %i 在哪出现，哦，是第一行出现过，跟函数定义的参数类似的东西。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">是不是传进来什么寄存器，这里的 %i 就会被替换成什么寄存器。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">这下懂了，类比 C 语言，这就像是 </span><code><span style="font-family: Menlo, Monaco, Consolas, monospace;">#define</span></code><span style="font-family: Menlo, Monaco, Consolas, monospace;"> 关键词，进行一整个的替换。使用的时候，只需要像下面这样使用：</span></p><pre><span style="font-family: Menlo, Monaco, Consolas, monospace;"> .macro RI(%i)<br/>     li $v0, 5<br/>     syscall<br/>     move %i, $v0<br/> .end_macro<br/> <br/> .text<br/> RI($s0)<br/></span></pre><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">就可以直接读入一个整数，存放到 $s0 寄存器当中。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">类似的，如果使用</span><code><span style="font-family: Menlo, Monaco, Consolas, monospace;">RI($t0)</span></code><span style="font-family: Menlo, Monaco, Consolas, monospace;">，就可以读到 $t0 寄存器当中。想读到哪就读到哪，非常的方便。</span></p><p><br/></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">而且宏定义，想传几个参数就传几个参数，还可以嵌套使用，非常的方便，可以大大简化 MIPS 汇编代码的编写。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">下面列举一些，好用的输入输出宏定义：</span></p><pre> #read int
+                    <p><span style="font-family: Menlo, Monaco, Consolas, monospace;">前面我们已经学习了 MIPS 汇编的基本使用。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">下面我们在此基础上回顾一下 MIPS 汇编，同时讲一些高级一点的用法。</span></p><h3><span style="font-family: Menlo, Monaco, Consolas, monospace;">宏定义</span></h3><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">有的同学可能会说，这个输入输出每次都要写好几条指令才能做到，但是每次写起来都是一样的，有没有更方便的方法去完成这件事呢？</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">当然有，我们隆重向大家介绍宏定义。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">宏定义需要使用 .macro 和 .end_macro 进行包裹。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">看下面的例子：</span></p><pre><span style="font-family: Menlo, Monaco, Consolas, monospace;"> .macro RI(%i)<br/>     li $v0, 5<br>     syscall<br/>     move %i, $v0<br/> .end_macro<br/></br></span></pre><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">首先阅读一下中间三行 MIPS 代码：</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">$v0 寄存器的值设置成 5，然后 syscall 系统调用，这个时候程序会进行读入整数的操作。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">然后，将读到 $v0 寄存器的值移动到 %i。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">坏了，%i 是什么没听说过啊？往上找找 %i 在哪出现，哦，是第一行出现过，跟函数定义的参数类似的东西。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">是不是传进来什么寄存器，这里的 %i 就会被替换成什么寄存器。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">这下懂了，类比 C 语言，这就像是 </span><code><span style="font-family: Menlo, Monaco, Consolas, monospace;">#define</span></code><span style="font-family: Menlo, Monaco, Consolas, monospace;"> 关键词，进行一整个的替换。使用的时候，只需要像下面这样使用：</span></p><pre><span style="font-family: Menlo, Monaco, Consolas, monospace;"> .macro RI(%i)<br/>     li $v0, 5<br/>     syscall<br/>     move %i, $v0<br/> .end_macro<br/> <br/> .text<br/> RI($s0)<br/></span></pre><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">就可以直接读入一个整数，存放到 $s0 寄存器当中。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">类似的，如果使用</span><code><span style="font-family: Menlo, Monaco, Consolas, monospace;">RI($t0)</span></code><span style="font-family: Menlo, Monaco, Consolas, monospace;">，就可以读到 $t0 寄存器当中。想读到哪就读到哪，非常的方便。</span></p><p><br/></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">而且宏定义，想传几个参数就传几个参数，还可以嵌套使用，非常的方便，可以大大简化 MIPS 汇编代码的编写。</span></p><p><span style="font-family: Menlo, Monaco, Consolas, monospace;">下面列举一些，好用的输入输出宏定义：</span></p><pre> #read int
  .macro RI(%i)
      li $v0, 5
      syscall

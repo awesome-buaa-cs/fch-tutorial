@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Project</title>
+    <title>4.3 汇编器 | My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="4.3.1 汇编器原理详解
 正如上文所述，汇编器将汇编语言文件翻译成二进制机器指令和二进制数据组成的文件，我们将在下文阐述MIPS汇编器的实现细节。
@@ -169,7 +169,7 @@ j end
     
     <meta property="og:url" content="https://example.org/2024/982/">
   <meta property="og:site_name" content="My New Hugo Project">
-  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:title" content="4.3 汇编器">
   <meta property="og:description" content="4.3.1 汇编器原理详解 正如上文所述，汇编器将汇编语言文件翻译成二进制机器指令和二进制数据组成的文件，我们将在下文阐述MIPS汇编器的实现细节。 首先我们先来看看汇编器在处理过程中可能面临的一些情况：
 简单情况： 计算和逻辑指令，例如 addu rd, rs, rt mult rs, rt lw rt, offset(rs) 等； 为将其汇编成二进制指令所需要的所有信息都已经包含在了指令中。 分支指令(Branch)： 分支指令中的imm字段代表的是相对当前指令地址的偏移量，即需要的是相对地址； 一旦将所有的伪指令解析成实际的机器代码以后，由于MIPS是定长指令，因此通过简单的计算我们便可以得到实际的地址偏移量。 前向引用：汇编语言允许标签在定义之前就被使用，如下图所示： beq $zero, $zero, Label Label: 汇编器在看到指令beq时，它不知道标签Label在哪里，因此也就无从得知相对地址偏移量了。
 为解决这个问题，我们首先引入一个概念——遍(Pass)。它指的是对源程序（包括源程序的中间形式）从头到尾扫描一次，并做有关的加工处理，生成新的源程序中间形式或目标程序，通常称为遍。
@@ -190,7 +190,7 @@ j, jal等指令的跳转标签，一般都是在文本段中定义的，无论�
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
-  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="name" content="4.3 汇编器">
   <meta itemprop="description" content="4.3.1 汇编器原理详解 正如上文所述，汇编器将汇编语言文件翻译成二进制机器指令和二进制数据组成的文件，我们将在下文阐述MIPS汇编器的实现细节。 首先我们先来看看汇编器在处理过程中可能面临的一些情况：
 简单情况： 计算和逻辑指令，例如 addu rd, rs, rt mult rs, rt lw rt, offset(rs) 等； 为将其汇编成二进制指令所需要的所有信息都已经包含在了指令中。 分支指令(Branch)： 分支指令中的imm字段代表的是相对当前指令地址的偏移量，即需要的是相对地址； 一旦将所有的伪指令解析成实际的机器代码以后，由于MIPS是定长指令，因此通过简单的计算我们便可以得到实际的地址偏移量。 前向引用：汇编语言允许标签在定义之前就被使用，如下图所示： beq $zero, $zero, Label Label: 汇编器在看到指令beq时，它不知道标签Label在哪里，因此也就无从得知相对地址偏移量了。
 为解决这个问题，我们首先引入一个概念——遍(Pass)。它指的是对源程序（包括源程序的中间形式）从头到尾扫描一次，并做有关的加工处理，生成新的源程序中间形式或目标程序，通常称为遍。
@@ -209,7 +209,7 @@ j, jal等指令的跳转标签，一般都是在文本段中定义的，无论�
 .data num: .space 8 num2: .space 16 .text add: lw $s5, -4($sp) lw $s6, -8($sp) addu $t0, $s5, $s6 move $v0, $t0 jr $ra main: la $v1, num li $s1, 10 li $s2, 20 sw $ra, 0($a3) sw $s1, -4($a3) sw $s2, -8($a3) move $sp, $a3 jal add lw $ra, 0($sp) move $t0, $v0 beq $t0, $0, end j end end: 剔除文件注释（在.s文件中，注释为#开头的单行注释）； 扩展伪指令，如li, la等； 记录文件符号，构建相应的符号定义表； 注意：在我们的处理中，为了区分符号是来自.data段还是来自.text段，我们为来自.data段中的符号，在符号名最开始追加一个%用于在符号定义表中区分。 标签（是否重复定义）和伪指令（是否合法）将被检查确认； 输出：中间文件（.int），对于.data段，只需要输出.data段所占据的字节数即可，按照如下格式： .data 24 .text lw $s5 -4 $sp lw $s6 -8 $sp addu $t0 $s5 $s6 addu $v0 $0 $t0 jr $ra lui $at num@Hi ori $v1 $at num@Lo addiu $s1 $0 10 addiu $s2 $0 20 sw $ra 0 $a3 sw $s1 -4 $a3 sw $s2 -8 $a3 addu $sp $0 $a3 jal add lw $ra 0 $sp addu $t0 $0 $v0 beq $t0 $0 end j end 第二遍：读取.int中间文件">
   <meta itemprop="wordCount" content="516">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:title" content="4.3 汇编器">
   <meta name="twitter:description" content="4.3.1 汇编器原理详解 正如上文所述，汇编器将汇编语言文件翻译成二进制机器指令和二进制数据组成的文件，我们将在下文阐述MIPS汇编器的实现细节。 首先我们先来看看汇编器在处理过程中可能面临的一些情况：
 简单情况： 计算和逻辑指令，例如 addu rd, rs, rt mult rs, rt lw rt, offset(rs) 等； 为将其汇编成二进制指令所需要的所有信息都已经包含在了指令中。 分支指令(Branch)： 分支指令中的imm字段代表的是相对当前指令地址的偏移量，即需要的是相对地址； 一旦将所有的伪指令解析成实际的机器代码以后，由于MIPS是定长指令，因此通过简单的计算我们便可以得到实际的地址偏移量。 前向引用：汇编语言允许标签在定义之前就被使用，如下图所示： beq $zero, $zero, Label Label: 汇编器在看到指令beq时，它不知道标签Label在哪里，因此也就无从得知相对地址偏移量了。
 为解决这个问题，我们首先引入一个概念——遍(Pass)。它指的是对源程序（包括源程序的中间形式）从头到尾扫描一次，并做有关的加工处理，生成新的源程序中间形式或目标程序，通常称为遍。
@@ -270,7 +270,7 @@ j, jal等指令的跳转标签，一般都是在文本段中定义的，无论�
           
         2024
       </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
+<h1 class="f1 athelas mt3 mb1">4.3 汇编器</h1>
       
       
       
@@ -595,7 +595,7 @@ j, jal等指令的跳转标签，一般都是在文本段中定义的，无论�
 <pre tabindex="0"><code class="language-mips" data-lang="mips">Label: .space number_of_bytes
 </code></pre><h4 id="汇编器实现">汇编器实现</h4>
 <p>汇编器整体调用关系如下：</p>
-<img src="/userfiles/markdown/tutorial/2022_11/30489ll1669605143.png" style="zoom:100%" align=center>
+<img src="../images/30489ll1669605143.png" style="zoom:100%" align=center>
 <p>在上文中我们说明了汇编器是如何构建符号定义表和重定位表的，在我们的汇编器中也定义了与之相对应的数据结构，它是我们实现构建查找符号表的基础：</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#66d9ef">typedef</span> <span style="color:#66d9ef">struct</span> {
 </span></span><span style="display:flex;"><span>    Symbol <span style="color:#f92672">*</span>tbl;    <span style="color:#75715e">// 符号数组

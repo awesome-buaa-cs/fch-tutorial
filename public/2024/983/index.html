@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Project</title>
+    <title>4.4 链接器 | My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="4.4.1 链接器原理详解
 链接器读取我们汇编器输出的数个.o文件，利用目标文件中的信息，进行符号解析，最终输出可执行的机器代码，例如（a.out）。
@@ -104,7 +104,7 @@ add.s:">
     
     <meta property="og:url" content="https://example.org/2024/983/">
   <meta property="og:site_name" content="My New Hugo Project">
-  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:title" content="4.4 链接器">
   <meta property="og:description" content="4.4.1 链接器原理详解 链接器读取我们汇编器输出的数个.o文件，利用目标文件中的信息，进行符号解析，最终输出可执行的机器代码，例如（a.out）。
 链接器能够得到每个文件的text和data段的大小以及它们的顺序。利用这些，链接器便可以计算每个符号的绝对地址。
 为了解析符号，链接器首先搜索每个文件的符号表（即每个文件定义的符号），如果没有找到，将继续在库文件中搜索(例如printf)。一旦获取到符号的定义位置，链接器就会填入实际的地址，完善机器代码。最终链接器输出的可执行文件包括.text和.data段（加上ELF文件头）。
@@ -120,7 +120,7 @@ main.s:
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
-  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="name" content="4.4 链接器">
   <meta itemprop="description" content="4.4.1 链接器原理详解 链接器读取我们汇编器输出的数个.o文件，利用目标文件中的信息，进行符号解析，最终输出可执行的机器代码，例如（a.out）。
 链接器能够得到每个文件的text和data段的大小以及它们的顺序。利用这些，链接器便可以计算每个符号的绝对地址。
 为了解析符号，链接器首先搜索每个文件的符号表（即每个文件定义的符号），如果没有找到，将继续在库文件中搜索(例如printf)。一旦获取到符号的定义位置，链接器就会填入实际的地址，完善机器代码。最终链接器输出的可执行文件包括.text和.data段（加上ELF文件头）。
@@ -134,7 +134,7 @@ main.s:
 .data num: .space 8 .text main: la $v1, num li $s1, 10 li $s2, 20 sw $ra, 0($a3) sw $s1, -4($a3) sw $s2, -8($a3) move $sp, $a3 jal add lw $ra, 0($sp) move $t0, $v0 beq $t0, $0, end j end end: add.s:">
   <meta itemprop="wordCount" content="186">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:title" content="4.4 链接器">
   <meta name="twitter:description" content="4.4.1 链接器原理详解 链接器读取我们汇编器输出的数个.o文件，利用目标文件中的信息，进行符号解析，最终输出可执行的机器代码，例如（a.out）。
 链接器能够得到每个文件的text和data段的大小以及它们的顺序。利用这些，链接器便可以计算每个符号的绝对地址。
 为了解析符号，链接器首先搜索每个文件的符号表（即每个文件定义的符号），如果没有找到，将继续在库文件中搜索(例如printf)。一旦获取到符号的定义位置，链接器就会填入实际的地址，完善机器代码。最终链接器输出的可执行文件包括.text和.data段（加上ELF文件头）。
@@ -190,7 +190,7 @@ main.s:
           
         2024
       </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
+<h1 class="f1 athelas mt3 mb1">4.4 链接器</h1>
       
       
       
@@ -200,7 +200,7 @@ main.s:
     </header>
     <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-100-l"><h3 id="441-链接器原理详解">4.4.1 链接器原理详解</h3>
 <p>链接器读取我们汇编器输出的数个.o文件，利用目标文件中的信息，进行符号解析，最终输出可执行的机器代码，例如（<code>a.out</code>）。</p>
-<p><img src="/cguserImages?_img=6a0ed56c4cd8f91d72adc7629d40f38c.jpg" alt=""></p>
+<p><img src="../images/6a0ed56c4cd8f91d72adc7629d40f38c.jpg" alt=""></p>
 <p>链接器能够得到每个文件的text和data段的大小以及它们的顺序。利用这些，链接器便可以计算每个符号的绝对地址。</p>
 <p>为了解析符号，链接器首先搜索每个文件的符号表（即每个文件定义的符号），如果没有找到，将继续在库文件中搜索(例如<code>printf</code>)。一旦获取到符号的定义位置，链接器就会填入实际的地址，完善机器代码。最终链接器输出的可执行文件包括<code>.text</code>和<code>.data</code>段（加上ELF文件头）。</p>
 <p>对于我们的链接器而言，有四类地址：</p>
@@ -230,7 +230,7 @@ main.s:
 </ol>
 <h4 id="链接器实现">链接器实现</h4>
 <p>链接器整体调用关系如下：</p>
-<p><img src="/cguserImages?_img=f815e944dea614d90544031b8a9a5cad.png" alt="linker"></p>
+<p><img src="../images/f815e944dea614d90544031b8a9a5cad.png" alt="linker"></p>
 <p>我们在汇编器的重定位表中引入新的结构体<code>RelocData</code>(定义在<code>linker_utils.h</code>)，主要是在重定位表中加入：</p>
 <ul>
 <li>字段<code>text_size</code>用于记录该文件的<code>.text</code>段需要占据的字节数；</li>

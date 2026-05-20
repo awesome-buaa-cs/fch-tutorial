@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     
-    <title>My New Hugo Project</title>
+    <title>Valgrind与Cache评测 | My New Hugo Project</title>
     <meta name="viewport" content="width=device-width,minimum-scale=1">
     <meta name="description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
 Valgrind简介
@@ -102,7 +102,7 @@ memory trace的格式如下：">
     
     <meta property="og:url" content="https://example.org/2024/978/">
   <meta property="og:site_name" content="My New Hugo Project">
-  <meta property="og:title" content="My New Hugo Project">
+  <meta property="og:title" content="Valgrind与Cache评测">
   <meta property="og:description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
 Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
 Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
@@ -133,7 +133,7 @@ memory trace的格式如下：">
   <meta property="og:type" content="article">
     <meta property="article:section" content="2024">
 
-  <meta itemprop="name" content="My New Hugo Project">
+  <meta itemprop="name" content="Valgrind与Cache评测">
   <meta itemprop="description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
 Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
 Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
@@ -162,7 +162,7 @@ Valgrind在Cache评测中的应用 Part1：Cache的模拟器实现 valgrind可�
 memory trace的格式如下：">
   <meta itemprop="wordCount" content="163">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="My New Hugo Project">
+  <meta name="twitter:title" content="Valgrind与Cache评测">
   <meta name="twitter:description" content="本实验应用了Valgrind这一强大的工具来辅助我们完成Cache的设计与评测，为了方便同学们理解memory trace（即我们所说的内存访问记录），并理解我们如何获取矩阵转置函数的内存访问记录，我们对Valgrind和实验中的评测代码进行进一步的说明（此部分不理解完全不影响实验的完成，只需成功安装Valgrind用于本地实验评测即可）。
 Valgrind简介 Valgrind 是运行在Linux 上的多用途代码剖析和内存调试软件。主要包括Memcheck、Callgrind、Cachegrind 等工具，每个工具都能完成一项任务调试、检测或分析。可以检测内存泄漏、线程违例和Cache 的使用等。Valgrind 基于仿真方式对程序进行调试，它先于应用程序获取实际处理器的控制权，并在实际处理器的基础上仿真一个虚拟处理器，并使应用程序运行于这个虚拟处理器之上，从而对应用程序的运行进行监视。应用程序并不知道该处理器是虚拟的还是实际的，已经编译成二进制代码的应用程序并不用重新进行编译，Valgrind 直接解释二进制代码使得应用程序基于它运行，从而能够检查内存操作时可能出现的错误。
 Valgrind的安装 由于valgrind没有提供Windows版本，因此建议是使用Linux系统（可以使用虚拟机）来进行相关的调试。
@@ -233,7 +233,7 @@ memory trace的格式如下：">
           
         2024
       </aside><div id="sharing" class="mt3 ananke-socials"></div>
-<h1 class="f1 athelas mt3 mb1"></h1>
+<h1 class="f1 athelas mt3 mb1">Valgrind与Cache评测</h1>
       
       
       
