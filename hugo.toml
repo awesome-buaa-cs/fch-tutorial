@@ -1,6 +1,6 @@
-baseURL = 'https://example.org/'
+baseURL = 'https://awesome-buaa-cs.github.io/fch-tutorial/'
 locale = 'zh-Hans-CN'
-title = 'My New Hugo Project'
+title = '北航软院计组教程整理'
 theme = 'ananke'
 
 [markup.goldmark.renderer]
