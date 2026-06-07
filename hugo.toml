@@ -3,6 +3,9 @@ locale = 'zh-Hans-CN'
 title = '北航软院计组教程整理'
 theme = 'ananke'
 
+[security]
+allowContent = ['.*']
+
 [markup.goldmark.renderer]
 unsafe = true
 
